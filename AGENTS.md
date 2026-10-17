@@ -29,7 +29,7 @@ Prioritise quality, clarity, and maintainability over rapid, haphazard generatio
 
 ## Architecture Decision Records (ADRs)
 
-- Major technical choices (libraries, architectural patterns, state approaches, geospatial engines) are documented in `docs/adr/` *at the time the technology is introduced*.
+- Major technical choices (libraries, architectural patterns, state approaches, geospatial engines) are documented in `docs/adr/` _at the time the technology is introduced_.
 - ADRs reflect **software architecture**, distinct from domain scientific research (`research.md`).
 - When a new tool, major refactor, or architectural pattern is introduced:
   1. Draft a new ADR in `docs/adr/XXXX-<title>.md` using the ADR template.

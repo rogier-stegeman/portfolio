@@ -22,6 +22,22 @@ export default defineConfigWithVueTs(
   vueTsConfigs.recommended,
 
   {
+    name: 'app/vue-conventions',
+    files: ['**/*.vue'],
+    rules: {
+      'vue/block-lang': [
+        'error',
+        {
+          script: {
+            lang: 'ts',
+          },
+        },
+      ],
+      'vue/component-api-style': ['error', ['script-setup']],
+    },
+  },
+
+  {
     ...pluginVitest.configs.recommended,
     files: ['src/**/__tests__/*'],
   },
