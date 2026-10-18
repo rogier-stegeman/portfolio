@@ -1,0 +1,70 @@
+name: Preview
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: preview-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    name: preview
+    if: >-
+      (github.event.action == 'labeled' && github.event.label.name == 'preview') ||
+      (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'preview'))
+    runs-on: ubuntu-latest
+    env:
+      PREVIEW_ALIAS: pr-${{ github.event.pull_request.number }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build-only --mode preview
+      - name: Upload preview version to Cloudflare Workers
+        id: upload
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: versions upload --preview-alias ${{ env.PREVIEW_ALIAS }}
+      - name: Comment preview URL on PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+          WRANGLER_STDOUT: ${{ steps.upload.outputs.command-output }}
+          DEPLOYMENT_URL: ${{ steps.upload.outputs.deployment-url }}
+        run: |
+          MARKER="<!-- cloudflare-preview-comment -->"
+          ALIAS_URL=$(printf '%s\n' "$WRANGLER_STDOUT" | sed -n 's/.*Version Preview Alias URL:[[:space:]]*\(https:\/\/[^[:space:]]*\).*/\1/p' | head -n 1)
+          VERSION_URL=$(printf '%s\n' "$WRANGLER_STDOUT" | sed -n 's/.*Version Preview URL:[[:space:]]*\(https:\/\/[^[:space:]]*\).*/\1/p' | head -n 1)
+          if [ -z "$VERSION_URL" ]; then
+            VERSION_URL="$DEPLOYMENT_URL"
+          fi
+          if [ -z "$ALIAS_URL" ] && [ -n "$VERSION_URL" ]; then
+            ALIAS_URL=$(printf '%s' "$VERSION_URL" | sed "s|^https://[^-]*-|https://${PREVIEW_ALIAS}-|")
+          fi
+
+          BODY=$(printf '%s\n### Cloudflare Workers Preview\n\n- **Preview URL (alias):** %s\n- **Version URL:** %s\n- **Commit:** `%s`\n' "$MARKER" "$ALIAS_URL" "$VERSION_URL" "${COMMIT_SHA}")
+
+          COMMENT_ID=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" --paginate --jq ".[] | select(.body | contains(\"${MARKER}\")) | .id" | head -n 1)
+
+          if [ -n "$COMMENT_ID" ]; then
+            gh api --method PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${COMMENT_ID}" -f body="$BODY"
+          else
+            gh api --method POST "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" -f body="$BODY"
+          fi
