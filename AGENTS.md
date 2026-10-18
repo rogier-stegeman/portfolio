@@ -1,70 +1,37 @@
-# Agent Directives & Engineering Constitution
+# Agent Directives
 
-Prioritise quality, clarity, and maintainability over rapid, haphazard generation.
+## Simplicity & Styling
 
-## Technical Baseline
+- Express state and logic directly in standard Vue reactivity; extract a composable or helper only when a second caller shares the same behaviour.
+- Define explicit TypeScript interfaces for domain models.
+- Style components with Tailwind utility classes in the template and shared design tokens in `src/assets/main.css`.
 
-- **Framework:** Vue 3 with `<script setup lang="ts">` and the Composition API exclusively.
-- **TypeScript:** Strict mode enabled ("strict": true, "noImplicitAny": true, "forceConsistentCasingInFileNames": true). Avoid loose casting (`as unknown` or `any`).
-- **Component Contracts:** Use TypeScript type-based declarations for `defineProps<Props>()` and `defineEmits<Emits>()` rather than runtime object validation. Define explicit interfaces for domain models.
-- **Styling:** Tailwind CSS v4. Keep styles clean, idiomatic, and readable.
-- **Primitives:** shadcn-vue (backed by Reka UI) and `@lucide/vue` icons.
-- **Testing:** Vitest + `@vue/test-utils` + `happy-dom`.
+## Domain Modelling & Architecture
 
-## Simplicity & The KISS Principle
+- Use the canonical terms defined in [`GLOSSARY.md`](./GLOSSARY.md) across code, tests, documentation, issues, and pull requests, and update `GLOSSARY.md` inline as domain concepts crystallise.
+- For domain-specific Apps (e.g., urban ecology), co-locate `src/apps/<app>/research.md` and provide an in-app trigger (drawer or modal) so reviewers can read the methodology and literature directly in the App.
+- Offer a new Architecture Decision Record (`docs/adr/NNNN-<slug>.md`) only when all three `/domain-modeling` criteria hold:
+  1. **Hard to reverse**: changing course later carries meaningful cost.
+  2. **Surprising without context**: a future reader will wonder why it was done this way.
+  3. **The result of a real trade-off**: genuine alternatives existed and one was chosen for specific reasons.
+- Draft new ADRs in `proposed` status with objective **Context**, **Considered Options**, and **Consequences**, leaving a draft prompt in **Decision** for the human lead author to finalise in their own voice, and link the ADR in [`README.md`](./README.md).
 
-- Write code that is as simple as possible to get the job done cleanly.
-- Avoid premature abstractions. Do not create composables, generic utility wrappers, or state machines for logic that can be handled clearly in standard Vue reactivity.
-- Keep styling straightforward: use Tailwind utility classes directly in the template. Avoid deeply nested custom CSS classes or complex dynamic style objects unless strictly necessary.
+## Backlog & Issue Tracking
 
-## Backlog & Idea Management (GitHub Issues)
+- Track backlog tasks, feature ideas, and planned enhancements in **GitHub Issues**. When an out-of-scope enhancement arises during work, propose a concise GitHub Issue title and description.
 
-- Backlog tasks, feature ideas, and planned enhancements are tracked exclusively through **GitHub Issues**.
-- When an idea or enhancement arises during development, propose a concise GitHub Issue title and short description.
+## Testing & Verification
 
-## In-App Domain Research & Methodology
+- Test behaviour through public module and router interfaces on both **happy paths** (complete, valid data and expected rendering) and **expected failures & edge cases** (empty states, missing inputs, unmatched or gated routes).
+- Verify visual changes in the integrated browser before concluding any UI task.
+- Run `pnpm verify` as the single verification gate (lint, format check, type-check, unit/integration tests, and production build) before completing an increment.
 
-- For domain-specific applications (e.g., urban ecology), co-locate a `research.md` directly inside that app's root folder (`src/apps/<app>/research.md`).
-- When building these apps, provide an in-app trigger (e.g., a "Methodology & Research" button) to render this content directly in an in-app drawer or modal so reviewers can inspect the literature and methodology directly in the application.
+## Git & Pull Requests
 
-## Architecture Decision Records (ADRs)
-
-- Major technical choices (libraries, architectural patterns, state approaches, geospatial engines) are documented in `docs/adr/` _at the time the technology is introduced_.
-- ADRs reflect **software architecture**, distinct from domain scientific research (`research.md`).
-- When a new tool, major refactor, or architectural pattern is introduced:
-  1. Draft a new ADR in `docs/adr/XXXX-<title>.md` using the ADR template.
-  2. Populate the **Context**, **Options Considered**, and **Evaluation/Trade-offs** objectively.
-  3. Leave the **Decision & Rationale** section formatted as a draft prompt for the human lead author to finalise in their own voice.
-  4. Link the new ADR in the root `README.md` index table.
-
-## Incremental Execution & Reviewability
-
-- Build in small, well-executed, logical increments. Keep tasks focused on a single clear objective so changes remain easily inspectable and reviewable by a human reviewer.
-- Never bundle foundational scaffolding, UI library primitives, and full feature applications into a single monolithic commit.
-- Verify visual changes in Antigravity's integrated browser before concluding any UI task.
-
-## Testing & Verification Standards
-
-- Every business function, router resolution, and interactive component must have corresponding unit/integration tests in Vitest.
-- Test dual conditions across the board:
-  1. **Happy Paths:** Verify components and views render and behave correctly when given complete, valid data.
-  2. **Expected Failures & Edge Cases:** Verify graceful degradations, empty states, missing props, and unmatched routes.
-- Run `npm run type-check` (`vue-tsc --noEmit`), `npm run test -- --run`, and `npm run build` to verify clean passes and zero TypeScript diagnostics before completing an increment.
-
-## Git & Branching Protocol
-
-- Follow the **Conventional Commits** specification:
-  - `feat(<scope>): <short description>`
-  - `fix(<scope>): <short description>`
-  - `test(<scope>): <short description>`
-  - `refactor(<scope>): <short description>`
-  - `chore(<scope>): <short description>`
-- Routine development occurs on local feature branches (`feat/<name>`).
-- Only push to branches matching `preview/*` (e.g., `preview/cv-layout`) when a live Cloudflare preview build is explicitly requested, to conserve build limits.
-
-## Cloudflare Management
-
-- Use the connected Cloudflare MCP server to register custom subdomains and inspect Pages project status.
+- Keep each commit and pull request focused on a single logical objective.
+- Format commit messages using **Conventional Commits** (`<type>(<scope>): <description>`) with allowed types: `feat`, `fix`, `test`, `refactor`, `chore`, `docs`, `ci`, `build`, `perf`.
+- Develop on a feature branch (`feat/<name>`), open a pull request once `pnpm verify` passes, and stop; only the human maintainer merges pull requests.
+- Add the `preview` label to a pull request when a live Cloudflare Workers preview deployment (`pr-<number>`) is requested.
 
 ## Language Conventions
 
