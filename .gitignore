@@ -33,3 +33,9 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+
+# Wrangler & environment secrets
+.wrangler
+.env
+.env.*
+!.env.example
