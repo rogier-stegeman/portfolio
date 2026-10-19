@@ -27,6 +27,11 @@
 - Verify visual changes in the integrated browser before concluding any UI task.
 - Run `pnpm verify` as the single verification gate (lint, format check, type-check, unit/integration tests, and production build) before completing an increment.
 
+## Shell & Environment Execution
+
+- When running HTTP checks or shell commands on Windows (PowerShell), always invoke the native binary `curl.exe` with an explicit timeout (e.g., `curl.exe --max-time 5 ...`) rather than bare `curl` (which aliases to `Invoke-WebRequest` and hangs indefinitely during headless Internet Explorer COM initialisation).
+- Enforce explicit process timeouts or watchdog timers on background commands to prevent silent stalls.
+
 ## Git & Pull Requests
 
 - Keep each commit and pull request focused on a single logical objective.
