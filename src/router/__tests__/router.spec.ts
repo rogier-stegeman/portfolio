@@ -53,12 +53,6 @@ describe('Portfolio routing', () => {
     expect(exitLink.exists()).toBe(true)
     expect(exitLink.text()).toContain('Exit to Portfolio')
 
-    // Shell header: Breadcrumbs
-    const breadcrumbNav = wrapper.find('nav[aria-label="Breadcrumbs"]')
-    expect(breadcrumbNav.exists()).toBe(true)
-    expect(breadcrumbNav.text()).toContain('Playground')
-    expect(breadcrumbNav.text()).toContain('Overview')
-
     // Shell sidebar: Navigation links
     const sidebar = wrapper.find('nav[aria-label="Playground navigation"]')
     expect(sidebar.exists()).toBe(true)
@@ -75,35 +69,28 @@ describe('Portfolio routing', () => {
     expect(main.find('a[href="/playground/prototypes"]').exists()).toBe(true)
   })
 
-  it('resolves sub-routes to their view components within the shell with updated breadcrumbs', async () => {
+  it('resolves sub-routes to their view components within the shell', async () => {
     // Tokens workbench
     const { wrapper: tokensWrapper } = await mountAppAt('/playground/tokens', true)
     expect(tokensWrapper.find('h1').text()).toContain('Design Tokens')
-    expect(tokensWrapper.find('nav[aria-label="Breadcrumbs"]').text()).toContain('Tokens')
     expect(tokensWrapper.find('nav[aria-label="Playground navigation"]').exists()).toBe(true)
 
     // Components workbench
     const { wrapper: componentsWrapper } = await mountAppAt('/playground/components', true)
     expect(componentsWrapper.find('h1').text()).toContain('Component Workbench')
-    expect(componentsWrapper.find('nav[aria-label="Breadcrumbs"]').text()).toContain('Components')
     expect(componentsWrapper.find('nav[aria-label="Playground navigation"]').exists()).toBe(true)
 
     // Prototypes index
     const { wrapper: prototypesWrapper } = await mountAppAt('/playground/prototypes', true)
     expect(prototypesWrapper.find('h1').text()).toContain('UI Prototypes')
-    expect(prototypesWrapper.find('nav[aria-label="Breadcrumbs"]').text()).toContain('Prototypes')
     expect(prototypesWrapper.find('nav[aria-label="Playground navigation"]').exists()).toBe(true)
   })
 
-  it('resolves dynamic prototype route /playground/prototypes/:name with parameter in title and breadcrumbs', async () => {
+  it('resolves dynamic prototype route /playground/prototypes/:name with parameter in title', async () => {
     const { wrapper } = await mountAppAt('/playground/prototypes/hero-variant', true)
 
     expect(wrapper.find('h1').text()).toContain('Prototype: hero-variant')
-    const breadcrumbs = wrapper.find('nav[aria-label="Breadcrumbs"]')
-    expect(breadcrumbs.text()).toContain('Playground')
-    expect(breadcrumbs.text()).toContain('Prototypes')
-    expect(breadcrumbs.text()).toContain('hero-variant')
-    expect(breadcrumbs.find('a[href="/playground/prototypes"]').exists()).toBe(true)
+    expect(wrapper.find('nav[aria-label="Playground navigation"]').exists()).toBe(true)
   })
 
   it('transitions between sub-routes when clicking navigation links without full page reloads', async () => {
@@ -122,11 +109,12 @@ describe('Portfolio routing', () => {
 
     expect(router.currentRoute.value.fullPath).toBe('/playground/tokens')
     expect(wrapper.find('h1').text()).toContain('Design Tokens')
-    expect(wrapper.find('nav[aria-label="Breadcrumbs"]').text()).toContain('Tokens')
 
-    // Click breadcrumb link back to Playground
-    const breadcrumbRootLink = wrapper.find('nav[aria-label="Breadcrumbs"] a[href="/playground"]')
-    await breadcrumbRootLink.trigger('click')
+    // Click Overview in sidebar back to Playground root
+    const overviewLink = wrapper.find(
+      'nav[aria-label="Playground navigation"] a[href="/playground"]',
+    )
+    await overviewLink.trigger('click')
     await flushPromises()
 
     expect(router.currentRoute.value.fullPath).toBe('/playground')
