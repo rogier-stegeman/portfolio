@@ -36,7 +36,7 @@
 
 - Keep each commit and pull request focused on a single logical objective.
 - Format commit messages using **Conventional Commits** (`<type>(<scope>): <description>`) with allowed types: `feat`, `fix`, `test`, `refactor`, `chore`, `docs`, `ci`, `build`, `perf`.
-- Develop on a feature branch (`feat/<name>`), open a pull request once `pnpm verify` passes, and stop; only the human maintainer merges pull requests.
+- Develop on a feature branch (`feat/<name>`), run `pnpm verify`, and pause with changes uncommitted for local review in chat; commit, push, and open a pull request only when the human maintainer asks, and leave merging to the human maintainer.
 - Add the `preview` label to a pull request when a live Cloudflare Workers preview deployment (`pr-<number>`) is requested.
 
 ## Language Conventions
