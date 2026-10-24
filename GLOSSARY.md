@@ -23,3 +23,7 @@ _Avoid_: Draft app, staging app, hidden app
 **Playground**:
 A development-only area for exploring UI outside any App: a workbench for shared components and styling, and the home for design prototypes that have no page to live on. Never visible to visitors; not an App.
 _Avoid_: Sandbox, demo, storybook, incubator
+
+**Prototype**:
+A temporary, throwaway exploration created to answer a design question (such as layout or state flow), evaluated via switchable variants. Hosted either directly on an existing App page or within the Playground; never shipped to production.
+_Avoid_: Spike, experiment, POC, mock

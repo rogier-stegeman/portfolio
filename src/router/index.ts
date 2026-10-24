@@ -27,8 +27,34 @@ export function createAppRouter(options: CreateAppRouterOptions = {}) {
         ? [
             {
               path: '/playground',
-              name: 'playground',
-              component: () => import('@/views/PlaygroundView.vue'),
+              component: () => import('@/playground/PlaygroundShell.vue'),
+              children: [
+                {
+                  path: '',
+                  name: 'playground-overview',
+                  component: () => import('@/playground/views/PlaygroundOverviewView.vue'),
+                },
+                {
+                  path: 'tokens',
+                  name: 'playground-tokens',
+                  component: () => import('@/playground/views/TokensPlaceholderView.vue'),
+                },
+                {
+                  path: 'components',
+                  name: 'playground-components',
+                  component: () => import('@/playground/views/ComponentsPlaceholderView.vue'),
+                },
+                {
+                  path: 'prototypes',
+                  name: 'playground-prototypes',
+                  component: () => import('@/playground/views/PrototypesPlaceholderView.vue'),
+                },
+                {
+                  path: 'prototypes/:name',
+                  name: 'playground-prototype-detail',
+                  component: () => import('@/playground/views/PrototypeDetailPlaceholderView.vue'),
+                },
+              ],
             },
           ]
         : []),

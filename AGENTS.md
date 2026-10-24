@@ -14,6 +14,7 @@
   1. **Hard to reverse**: changing course later carries meaningful cost.
   2. **Surprising without context**: a future reader will wonder why it was done this way.
   3. **The result of a real trade-off**: genuine alternatives existed and one was chosen for specific reasons.
+- Place standalone UI prototypes (`/prototype` skill sub-shape B) in `src/playground/prototypes/` to be hosted within the Playground at `/playground/prototypes/:name`.
 - Draft new ADRs in `proposed` status with objective **Context**, **Considered Options**, and **Consequences**, leaving a draft prompt in **Decision** for the human lead author to finalise in their own voice, and link the ADR in [`README.md`](./README.md).
 
 ## Backlog & Issue Tracking
@@ -25,6 +26,11 @@
 - Test behaviour through public module and router interfaces on both **happy paths** (complete, valid data and expected rendering) and **expected failures & edge cases** (empty states, missing inputs, unmatched or gated routes).
 - Verify visual changes in the integrated browser before concluding any UI task.
 - Run `pnpm verify` as the single verification gate (lint, format check, type-check, unit/integration tests, and production build) before completing an increment.
+
+## Shell & Environment Execution
+
+- When running HTTP checks or shell commands on Windows (PowerShell), always invoke the native binary `curl.exe` with an explicit timeout (e.g., `curl.exe --max-time 5 ...`) rather than bare `curl` (which aliases to `Invoke-WebRequest` and hangs indefinitely during headless Internet Explorer COM initialisation).
+- Enforce explicit process timeouts or watchdog timers on background commands to prevent silent stalls.
 
 ## Git & Pull Requests
 
