@@ -5,6 +5,8 @@
 - Express state and logic directly in standard Vue reactivity; extract a composable or helper only when a second caller shares the same behaviour.
 - Define explicit TypeScript interfaces for domain models.
 - Style components with Tailwind utility classes in the template and shared design tokens in `src/assets/main.css`.
+- Build initial views with minimal, unopinionated markup and layout classes; defer decorative flourishes until shared UI primitives exist.
+- Use built-in framework and router capabilities rather than custom state or duplicated responsive DOM trees.
 
 ## Domain Modelling & Architecture
 
@@ -24,7 +26,7 @@
 ## Testing & Verification
 
 - Test behaviour through public module and router interfaces on both **happy paths** (complete, valid data and expected rendering) and **expected failures & edge cases** (empty states, missing inputs, unmatched or gated routes).
-- Verify visual changes in the integrated browser before concluding any UI task.
+- Verify visual changes in the integrated browser before concluding any UI task; if no browser tool is available in the session, notify the user to verify the UI locally during review rather than probing the dev server via shell HTTP requests.
 - Run `pnpm verify` as the single verification gate (lint, format check, type-check, unit/integration tests, and production build) before completing an increment.
 
 ## Shell & Environment Execution
@@ -36,7 +38,7 @@
 
 - Keep each commit and pull request focused on a single logical objective.
 - Format commit messages using **Conventional Commits** (`<type>(<scope>): <description>`) with allowed types: `feat`, `fix`, `test`, `refactor`, `chore`, `docs`, `ci`, `build`, `perf`.
-- Develop on a feature branch (`feat/<name>`), open a pull request once `pnpm verify` passes, and stop; only the human maintainer merges pull requests.
+- Develop on a feature branch (`feat/<name>`), run `pnpm verify`, and pause with changes uncommitted for local review in chat; commit, push, and open a pull request only when the human maintainer asks, and leave merging to the human maintainer.
 - Add the `preview` label to a pull request when a live Cloudflare Workers preview deployment (`pr-<number>`) is requested.
 
 ## Language Conventions

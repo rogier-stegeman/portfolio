@@ -1,6 +1,6 @@
 ---
 name: implement
-description: "Implement a piece of work based on a spec or set of tickets."
+description: 'Implement a piece of work based on a spec or set of tickets.'
 disable-model-invocation: true
 ---
 
@@ -14,4 +14,4 @@ Run typechecking regularly, single test files regularly, and the full test suite
 
 Once done, call the Skill tool with "code-review" to review the work.
 
-Commit your work to the current branch.
+Pause with changes uncommitted for local review in chat.
