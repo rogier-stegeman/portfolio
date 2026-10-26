@@ -57,7 +57,7 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 
 ### 4. Review the diff (sub-agents or fast-path)
 
-For micro-diffs (under 10 lines of non-executable changes, such as purely declarative styling, tokens, or documentation updates), evaluate both axes in-process directly in the parent agent rather than dispatching sub-agents.
+For micro-diffs such as very small changes, declarative styling, or documentation updates, evaluate both axes in-process directly in the parent agent rather than dispatching sub-agents.
 
 Otherwise, spawn both sub-agents concurrently in a single `invoke_subagent` call with `Model: "flash"`.
 
