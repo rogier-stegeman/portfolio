@@ -8,7 +8,7 @@ Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
 - **Standards**: does the code conform to this repo's documented coding standards?
 - **Spec**: does the code faithfully implement the originating issue / spec?
 
-Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
+Both axes run as **parallel sub-agents** (or in-process for micro-diffs) so they don't pollute each other's context, then this skill aggregates their findings.
 
 The issue tracker should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`.
 
@@ -55,9 +55,11 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 - **Middle Man**: a class or function that mostly just delegates onward. → cut it, call the real target direct.
 - **Refused Bequest**: a subclass or implementer that ignores or overrides most of what it inherits. → drop the inheritance, use composition.
 
-### 4. Spawn both sub-agents in parallel
+### 4. Review the diff (sub-agents or fast-path)
 
-Issue both sub-agent calls concurrently in a single `invoke_subagent` call with `Model: "flash"`.
+For micro-diffs such as very small changes, declarative styling, or documentation updates, evaluate both axes in-process directly in the parent agent rather than dispatching sub-agents.
+
+Otherwise, spawn both sub-agents concurrently in a single `invoke_subagent` call with `Model: "flash"`.
 
 Once launched, stop calling tools and yield execution; do not loop or post status polling messages. The messaging system will wake you reactively when the sub-agents complete.
 
