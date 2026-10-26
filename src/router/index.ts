@@ -37,7 +37,7 @@ export function createAppRouter(options: CreateAppRouterOptions = {}) {
                 {
                   path: 'tokens',
                   name: 'playground-tokens',
-                  component: () => import('@/playground/views/TokensPlaceholderView.vue'),
+                  component: () => import('@/playground/views/TokensView.vue'),
                 },
                 {
                   path: 'components',

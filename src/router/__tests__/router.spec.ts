@@ -86,6 +86,70 @@ describe('Portfolio routing', () => {
     expect(prototypesWrapper.find('nav[aria-label="Playground navigation"]').exists()).toBe(true)
   })
 
+  it('renders the Design Token workbench grouped into functional categories at /playground/tokens', async () => {
+    const { wrapper } = await mountAppAt('/playground/tokens', true)
+
+    const main = wrapper.find('main')
+    expect(main.find('h1').text()).toBe('Design Tokens')
+
+    const categoryHeadings = main.findAll('h2').map((heading) => heading.text())
+    expect(categoryHeadings).toEqual([
+      'Surfaces & Backgrounds',
+      'Brand & Action',
+      'Muted & Feedback',
+      'Borders & Radii',
+    ])
+
+    const mainText = main.text()
+    for (const token of [
+      '--background',
+      '--foreground',
+      '--card',
+      '--card-foreground',
+      '--popover',
+      '--popover-foreground',
+      '--primary',
+      '--primary-foreground',
+      '--secondary',
+      '--secondary-foreground',
+      '--accent',
+      '--accent-foreground',
+      '--muted',
+      '--muted-foreground',
+      '--destructive',
+      '--destructive-foreground',
+      '--border',
+      '--input',
+      '--ring',
+      '--radius-sm',
+      '--radius-md',
+      '--radius-lg',
+      '--radius-xl',
+    ]) {
+      expect(mainText).toContain(token)
+    }
+  })
+
+  it('pairs each surface colour swatch with sample text in its foreground colour', async () => {
+    const { wrapper } = await mountAppAt('/playground/tokens', true)
+
+    const primarySwatch = wrapper.find('[style*="var(--primary)"]')
+    expect(primarySwatch.exists()).toBe(true)
+    expect(primarySwatch.attributes('style')).toContain('color: var(--primary-foreground)')
+    expect(primarySwatch.text()).not.toBe('')
+
+    const primaryItem = wrapper.findAll('li').find((item) => item.text().includes('--primary'))
+    expect(primaryItem?.text()).toContain('Primary')
+  })
+
+  it('demonstrates each border radius scale with a curvature sample', async () => {
+    const { wrapper } = await mountAppAt('/playground/tokens', true)
+
+    for (const scale of ['sm', 'md', 'lg', 'xl']) {
+      expect(wrapper.find(`[style*="border-radius: var(--radius-${scale})"]`).exists()).toBe(true)
+    }
+  })
+
   it('resolves dynamic prototype route /playground/prototypes/:name with parameter in title', async () => {
     const { wrapper } = await mountAppAt('/playground/prototypes/hero-variant', true)
 
