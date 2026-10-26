@@ -25,9 +25,9 @@
 
 ## Testing & Verification
 
-- Test behaviour through public module and router interfaces on both **happy paths** (complete, valid data and expected rendering) and **expected failures & edge cases** (empty states, missing inputs, unmatched or gated routes).
+- Test behaviour through public module and router interfaces on both **happy paths** (complete, valid data and expected rendering) and **expected failures & edge cases** (empty states, missing inputs, unmatched or gated routes); do not test purely declarative styling or static configuration via file-system inspection.
 - Verify visual changes in the integrated browser before concluding any UI task; if no browser tool is available in the session, notify the user to verify the UI locally during review rather than probing the dev server via shell HTTP requests.
-- Run `pnpm verify` as the single verification gate (lint, format check, type-check, unit/integration tests, and production build) before completing an increment.
+- Run targeted tests and type-checks during iteration, reserving `pnpm verify` as the single verification gate (lint, format check, type-check, unit/integration tests, and production build) before completing an increment.
 
 ## Shell & Environment Execution
 
