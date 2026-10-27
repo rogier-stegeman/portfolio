@@ -76,9 +76,9 @@ const badgeVariantsList: BadgeVariantSample[] = [
         </p>
       </div>
 
-      <div class="space-y-3 rounded-lg border border-border bg-card p-6">
+      <div class="space-y-3 rounded-lg border bg-card p-6">
         <div class="space-y-2">
-          <p class="text-xs font-medium text-muted-foreground">Variants</p>
+          <h3 class="font-medium">Variants</h3>
           <div class="flex flex-wrap items-center gap-3">
             <Button
               v-for="sample in buttonVariantsList"
@@ -91,7 +91,7 @@ const badgeVariantsList: BadgeVariantSample[] = [
         </div>
 
         <div class="space-y-2">
-          <p class="text-xs font-medium text-muted-foreground">Text Button Sizes</p>
+          <h3 class="font-medium">Text Button Sizes</h3>
           <div class="flex flex-wrap items-center gap-3">
             <Button v-for="sample in buttonSizesList" :key="sample.size" :size="sample.size">
               {{ sample.label }}
@@ -100,7 +100,7 @@ const badgeVariantsList: BadgeVariantSample[] = [
         </div>
 
         <div class="space-y-2">
-          <p class="text-xs font-medium text-muted-foreground">Icon Button Sizes</p>
+          <h3 class="font-medium">Icon Button Sizes</h3>
           <div class="flex flex-wrap items-center gap-3">
             <Button
               v-for="sample in buttonIconSizesList"
@@ -115,7 +115,7 @@ const badgeVariantsList: BadgeVariantSample[] = [
         </div>
 
         <div class="space-y-2">
-          <p class="text-xs font-medium text-muted-foreground">Disabled States</p>
+          <h3 class="font-medium">Disabled States</h3>
           <div class="flex flex-wrap items-center gap-3">
             <Button disabled>Disabled Default</Button>
             <Button variant="secondary" disabled>Disabled Secondary</Button>
@@ -133,7 +133,7 @@ const badgeVariantsList: BadgeVariantSample[] = [
         </p>
       </div>
 
-      <div class="flex flex-wrap items-center gap-3 rounded-lg border border-border bg-card p-6">
+      <div class="flex flex-wrap items-center gap-3 rounded-lg border bg-card p-6">
         <Badge v-for="sample in badgeVariantsList" :key="sample.variant" :variant="sample.variant">
           {{ sample.label }}
         </Badge>
@@ -182,7 +182,7 @@ const badgeVariantsList: BadgeVariantSample[] = [
               Demonstrates a prompt or confirmation card with primary and secondary button triggers.
             </CardDescription>
           </CardHeader>
-          <CardContent class="text-muted-foreground">
+          <CardContent>
             Proves how Button primitives integrate inside CardFooter, aligning secondary dismiss and
             primary confirm actions below descriptive body copy.
           </CardContent>

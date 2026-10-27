@@ -47,7 +47,7 @@ const sections: WorkbenchSection[] = [
       <article
         v-for="section in sections"
         :key="section.href"
-        class="flex flex-col justify-between gap-4 rounded-lg border border-border bg-card p-6 text-card-foreground"
+        class="flex flex-col justify-between gap-4 rounded-lg border bg-card p-6 text-card-foreground"
       >
         <div class="space-y-1">
           <h2 class="font-semibold">{{ section.title }}</h2>

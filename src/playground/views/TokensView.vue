@@ -65,7 +65,7 @@ const radiusTokens: string[] = ['--radius-sm', '--radius-md', '--radius-lg', '--
       <ul class="grid grid-cols-1 gap-4 md:grid-cols-3">
         <li v-for="token in category.tokens" :key="token.variable" class="space-y-2">
           <div
-            class="rounded-md border border-border p-4"
+            class="rounded-md border p-4"
             :style="{
               backgroundColor: `var(${token.variable})`,
               color: `var(${token.foreground})`,
@@ -107,10 +107,7 @@ const radiusTokens: string[] = ['--radius-sm', '--radius-md', '--radius-lg', '--
 
       <ul class="grid grid-cols-2 gap-4 md:grid-cols-4">
         <li v-for="token in radiusTokens" :key="token" class="space-y-2">
-          <div
-            class="h-16 border border-border bg-muted"
-            :style="{ borderRadius: `var(${token})` }"
-          />
+          <div class="h-16 border bg-muted" :style="{ borderRadius: `var(${token})` }" />
           <p class="text-xs">
             <code>{{ token }}</code>
           </p>
