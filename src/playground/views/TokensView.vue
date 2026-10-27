@@ -74,7 +74,7 @@ const radiusTokens: string[] = ['--radius-sm', '--radius-md', '--radius-lg', '--
             <p class="font-semibold">Aa Heading</p>
             <p>The quick brown fox jumps over the lazy dog.</p>
           </div>
-          <div class="text-xs">
+          <div>
             <p class="font-medium">{{ token.name }}</p>
             <p>
               <code>{{ token.variable }}</code> /
@@ -96,7 +96,7 @@ const radiusTokens: string[] = ['--radius-sm', '--radius-md', '--radius-lg', '--
           >
             The quick brown fox jumps over the lazy dog.
           </div>
-          <div class="text-xs">
+          <div>
             <p class="font-medium">{{ token.name }}</p>
             <p>
               <code>{{ token.variable }}</code>
@@ -108,7 +108,7 @@ const radiusTokens: string[] = ['--radius-sm', '--radius-md', '--radius-lg', '--
       <ul class="grid grid-cols-2 gap-4 md:grid-cols-4">
         <li v-for="token in radiusTokens" :key="token" class="space-y-2">
           <div class="h-16 border bg-muted" :style="{ borderRadius: `var(${token})` }" />
-          <p class="text-xs">
+          <p>
             <code>{{ token }}</code>
           </p>
         </li>

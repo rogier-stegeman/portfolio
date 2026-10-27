@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { Button } from '@/components/ui/button'
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
 interface WorkbenchSection {
   title: string
@@ -34,7 +36,7 @@ const sections: WorkbenchSection[] = [
 </script>
 
 <template>
-  <div class="space-y-6">
+  <div class="space-y-8">
     <header class="space-y-2">
       <h1 class="text-2xl font-semibold">Playground Overview</h1>
       <p class="text-muted-foreground">
@@ -44,20 +46,20 @@ const sections: WorkbenchSection[] = [
     </header>
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-      <article
-        v-for="section in sections"
-        :key="section.href"
-        class="flex flex-col justify-between gap-4 rounded-lg border bg-card p-6 text-card-foreground"
-      >
-        <div class="space-y-1">
-          <h2 class="font-semibold">{{ section.title }}</h2>
-          <p class="text-muted-foreground">{{ section.description }}</p>
-        </div>
+      <Card v-for="section in sections" :key="section.href">
+        <CardHeader>
+          <CardTitle>{{ section.title }}</CardTitle>
+          <CardDescription>{{ section.description }}</CardDescription>
+        </CardHeader>
 
-        <RouterLink :to="section.href" class="font-medium text-primary">
-          {{ section.actionLabel }}
-        </RouterLink>
-      </article>
+        <CardFooter>
+          <Button variant="outline" as-child>
+            <RouterLink :to="section.href">
+              {{ section.actionLabel }}
+            </RouterLink>
+          </Button>
+        </CardFooter>
+      </Card>
     </div>
   </div>
 </template>

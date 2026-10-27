@@ -76,7 +76,7 @@ const badgeVariantsList: BadgeVariantSample[] = [
         </p>
       </div>
 
-      <div class="space-y-3 rounded-lg border bg-card p-6">
+      <div class="space-y-4">
         <div class="space-y-2">
           <h3 class="font-medium">Variants</h3>
           <div class="flex flex-wrap items-center gap-3">
@@ -133,7 +133,7 @@ const badgeVariantsList: BadgeVariantSample[] = [
         </p>
       </div>
 
-      <div class="flex flex-wrap items-center gap-3 rounded-lg border bg-card p-6">
+      <div class="flex flex-wrap items-center gap-3">
         <Badge v-for="sample in badgeVariantsList" :key="sample.variant" :variant="sample.variant">
           {{ sample.label }}
         </Badge>
@@ -144,54 +144,24 @@ const badgeVariantsList: BadgeVariantSample[] = [
       <div class="space-y-1">
         <h2 class="font-semibold">Card</h2>
         <p class="text-muted-foreground">
-          Composable surface containers displayed in realistic metadata and action contexts.
+          Composable surface container with header, title, description, action, content, and footer
+          slots.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Metadata Summary Card</CardTitle>
-            <CardDescription>
-              Demonstrates structured key-value display paired with a status badge and timestamp
-              footer.
-            </CardDescription>
-            <CardAction>
-              <Badge variant="secondary">Read-only</Badge>
-            </CardAction>
-          </CardHeader>
-          <CardContent class="space-y-2">
-            <div class="flex justify-between">
-              <span class="text-muted-foreground">Composition</span>
-              <span class="font-medium">Header + Content + Footer</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-muted-foreground">Interactive actions</span>
-              <Badge variant="outline">None</Badge>
-            </div>
-          </CardContent>
-          <CardFooter class="text-xs text-muted-foreground">
-            Proves container layout with non-actionable metadata
-          </CardFooter>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Action Card</CardTitle>
-            <CardDescription>
-              Demonstrates a prompt or confirmation card with primary and secondary button triggers.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            Proves how Button primitives integrate inside CardFooter, aligning secondary dismiss and
-            primary confirm actions below descriptive body copy.
-          </CardContent>
-          <CardFooter class="justify-end gap-2">
-            <Button variant="outline" size="sm">Dismiss</Button>
-            <Button size="sm">Confirm Action</Button>
-          </CardFooter>
-        </Card>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Card Title</CardTitle>
+          <CardDescription>Card Description</CardDescription>
+          <CardAction>Card Action</CardAction>
+        </CardHeader>
+        <CardContent>
+          <p>Card Content</p>
+        </CardContent>
+        <CardFooter>
+          <p>Card Footer</p>
+        </CardFooter>
+      </Card>
     </section>
   </div>
 </template>

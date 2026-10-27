@@ -179,9 +179,14 @@ describe('Portfolio routing', () => {
       expect(mainText).toContain(label)
     }
 
-    // Card showcase: realistic compositional cards with h3 titles
-    const cardTitles = main.findAll('h3').map((heading) => heading.text())
-    expect(cardTitles.length).toBeGreaterThanOrEqual(2)
+    // Card showcase: raw Card primitive and its sub-components
+    const card = main.find('[data-slot="card"]')
+    expect(card.exists()).toBe(true)
+    expect(card.find('[data-slot="card-title"]').text()).toBe('Card Title')
+    expect(card.find('[data-slot="card-description"]').text()).toBe('Card Description')
+    expect(card.find('[data-slot="card-action"]').text()).toBe('Card Action')
+    expect(card.find('[data-slot="card-content"]').text()).toBe('Card Content')
+    expect(card.find('[data-slot="card-footer"]').text()).toBe('Card Footer')
   })
 
   it('resolves dynamic prototype route /playground/prototypes/:name with parameter in title', async () => {
