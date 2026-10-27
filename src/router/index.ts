@@ -42,7 +42,7 @@ export function createAppRouter(options: CreateAppRouterOptions = {}) {
                 {
                   path: 'components',
                   name: 'playground-components',
-                  component: () => import('@/playground/views/ComponentsPlaceholderView.vue'),
+                  component: () => import('@/playground/views/ComponentsView.vue'),
                 },
                 {
                   path: 'prototypes',
