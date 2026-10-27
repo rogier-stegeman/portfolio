@@ -25,7 +25,7 @@ const navItems: NavItem[] = [
           :key="item.href"
           :to="item.href"
           exact-active-class="bg-accent text-accent-foreground"
-          class="rounded-md px-3 py-2 text-sm text-muted-foreground"
+          class="rounded-md px-3 py-2 text-muted-foreground"
         >
           {{ item.name }}
         </RouterLink>
@@ -34,7 +34,7 @@ const navItems: NavItem[] = [
 
     <div class="flex flex-1 flex-col">
       <header class="flex h-14 items-center justify-end border-b border-border px-6">
-        <RouterLink to="/cv" class="text-sm text-muted-foreground">Exit to Portfolio</RouterLink>
+        <RouterLink to="/cv" class="text-muted-foreground">Exit to Portfolio</RouterLink>
       </header>
 
       <main class="flex-1 p-6">

@@ -53,7 +53,7 @@ const radiusTokens: string[] = ['--radius-sm', '--radius-md', '--radius-lg', '--
   <div class="space-y-8">
     <header class="space-y-2">
       <h1 class="text-2xl font-semibold">Design Tokens</h1>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground">
         Semantic design tokens defined in <code>src/assets/main.css</code>, following the active
         system colour scheme.
       </p>
@@ -72,7 +72,7 @@ const radiusTokens: string[] = ['--radius-sm', '--radius-md', '--radius-lg', '--
             }"
           >
             <p class="font-semibold">Aa Heading</p>
-            <p class="text-sm">The quick brown fox jumps over the lazy dog.</p>
+            <p>The quick brown fox jumps over the lazy dog.</p>
           </div>
           <div class="text-xs">
             <p class="font-medium">{{ token.name }}</p>
@@ -91,7 +91,7 @@ const radiusTokens: string[] = ['--radius-sm', '--radius-md', '--radius-lg', '--
       <ul class="grid grid-cols-1 gap-4 md:grid-cols-3">
         <li v-for="token in borderTokens" :key="token.variable" class="space-y-2">
           <div
-            class="rounded-md border-4 bg-background p-4 text-sm text-foreground"
+            class="rounded-md border-4 bg-background p-4 text-foreground"
             :style="{ borderColor: `var(${token.variable})` }"
           >
             The quick brown fox jumps over the lazy dog.

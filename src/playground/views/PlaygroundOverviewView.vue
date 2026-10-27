@@ -37,7 +37,7 @@ const sections: WorkbenchSection[] = [
   <div class="space-y-6">
     <header class="space-y-2">
       <h1 class="text-2xl font-semibold">Playground Overview</h1>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground">
         A development-only workbench for inspecting design tokens, exercising reusable UI
         components, and evaluating throwaway design prototypes outside production builds.
       </p>
@@ -51,10 +51,10 @@ const sections: WorkbenchSection[] = [
       >
         <div class="space-y-1">
           <h2 class="font-semibold">{{ section.title }}</h2>
-          <p class="text-sm text-muted-foreground">{{ section.description }}</p>
+          <p class="text-muted-foreground">{{ section.description }}</p>
         </div>
 
-        <RouterLink :to="section.href" class="text-sm font-medium text-primary">
+        <RouterLink :to="section.href" class="font-medium text-primary">
           {{ section.actionLabel }}
         </RouterLink>
       </article>

@@ -16,7 +16,7 @@ import { FileText } from '@lucide/vue'
         </span>
         <div>
           <h1 class="text-2xl font-semibold tracking-tight">CV</h1>
-          <p class="text-sm text-muted-foreground">
+          <p class="text-muted-foreground">
             Curriculum vitae and Portfolio overview placeholder shell.
           </p>
         </div>

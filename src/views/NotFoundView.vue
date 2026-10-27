@@ -18,11 +18,11 @@ import { RouterLink } from 'vue-router'
         <div class="space-y-4">
           <div class="space-y-1">
             <h1 class="text-2xl font-semibold tracking-tight">Not Found</h1>
-            <p class="text-sm text-muted-foreground">The requested page could not be found.</p>
+            <p class="text-muted-foreground">The requested page could not be found.</p>
           </div>
           <RouterLink
             to="/cv"
-            class="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+            class="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
           >
             <ArrowLeft class="size-4" aria-hidden="true" />
             <span>Back to CV</span>

@@ -62,7 +62,7 @@ const badgeVariantsList: BadgeVariantSample[] = [
   <div class="space-y-8">
     <header class="space-y-2">
       <h1 class="text-2xl font-semibold">Component Workbench</h1>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground">
         Showcase and testing workbench for shared foundational UI primitives.
       </p>
     </header>
@@ -70,7 +70,7 @@ const badgeVariantsList: BadgeVariantSample[] = [
     <section class="space-y-4">
       <div class="space-y-1">
         <h2 class="font-semibold">Button</h2>
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground">
           Action triggers built on Reka UI primitives supporting semantic variants, standard sizes,
           and disabled states.
         </p>
@@ -128,7 +128,7 @@ const badgeVariantsList: BadgeVariantSample[] = [
     <section class="space-y-4">
       <div class="space-y-1">
         <h2 class="font-semibold">Badge</h2>
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground">
           Compact status and metadata indicators across semantic variants.
         </p>
       </div>
@@ -143,7 +143,7 @@ const badgeVariantsList: BadgeVariantSample[] = [
     <section class="space-y-4">
       <div class="space-y-1">
         <h2 class="font-semibold">Card</h2>
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground">
           Composable surface containers displayed in realistic metadata and action contexts.
         </p>
       </div>
@@ -160,7 +160,7 @@ const badgeVariantsList: BadgeVariantSample[] = [
               <Badge variant="secondary">Read-only</Badge>
             </CardAction>
           </CardHeader>
-          <CardContent class="space-y-2 text-sm">
+          <CardContent class="space-y-2">
             <div class="flex justify-between">
               <span class="text-muted-foreground">Composition</span>
               <span class="font-medium">Header + Content + Footer</span>
@@ -182,7 +182,7 @@ const badgeVariantsList: BadgeVariantSample[] = [
               Demonstrates a prompt or confirmation card with primary and secondary button triggers.
             </CardDescription>
           </CardHeader>
-          <CardContent class="text-sm text-muted-foreground">
+          <CardContent class="text-muted-foreground">
             Proves how Button primitives integrate inside CardFooter, aligning secondary dismiss and
             primary confirm actions below descriptive body copy.
           </CardContent>
