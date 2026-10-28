@@ -17,7 +17,7 @@ A software engineering Portfolio by Rogier Stegeman: a collection of self-contai
 | ----------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
 | Framework & Routing     | Vue 3 (`<script setup>`), Vite, Vue Router             | Lightweight, reactive single-page architecture with path-based App isolation on a single origin.                        |
 | Language                | TypeScript (strict mode)                               | Compile-time safety across component contracts, route definitions, and domain models.                                   |
-| Styling & UI Primitives | Tailwind CSS v4, `shadcn-vue` (Reka UI), `@lucide/vue` | Accessible headless primitives and CSS-first design tokens supporting system light and dark themes.                     |
+| Styling & UI Primitives | Tailwind CSS v4, `shadcn-vue` (Reka UI), `@lucide/vue` | Accessible headless primitives and CSS-first design tokens.                                                             |
 | Testing                 | Vitest, `@vue/test-utils`, `happy-dom`                 | Fast integration testing against public component and router seams.                                                     |
 | Linting & Formatting    | Oxlint, ESLint, Oxfmt, Husky, Commitlint               | Fast hybrid static analysis, Tailwind-aware formatting, and Conventional Commit enforcement.                            |
 | Hosting & CI/CD         | Cloudflare Workers (Static Assets), GitHub Actions     | Edge SPA hosting on `portfolio.rogier.app` with automated CI verification and opt-in `preview`-labelled PR deployments. |

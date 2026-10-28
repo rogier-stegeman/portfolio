@@ -54,8 +54,7 @@ const radiusTokens: string[] = ['--radius-sm', '--radius-md', '--radius-lg', '--
     <header class="space-y-2">
       <h1 class="text-2xl font-semibold">Design Tokens</h1>
       <p class="text-muted-foreground">
-        Semantic design tokens defined in <code>src/assets/main.css</code>, following the active
-        system colour scheme.
+        Semantic design tokens defined in <code>src/assets/main.css</code>.
       </p>
     </header>
 
