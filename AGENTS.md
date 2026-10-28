@@ -35,6 +35,7 @@
 ## Shell & Environment Execution
 
 - When running HTTP checks or shell commands on Windows (PowerShell), always invoke the native binary `curl.exe` with an explicit timeout (e.g., `curl.exe --max-time 5 ...`) rather than bare `curl` (which aliases to `Invoke-WebRequest` and hangs indefinitely during headless Internet Explorer COM initialisation).
+- When creating or editing GitHub issues or pull requests via `gh` on Windows (PowerShell), write multi-line Markdown bodies to a file and pass `--body-file` rather than inline `--body "..."` to prevent PowerShell from escaping backticks and mangling formatting.
 - Enforce explicit process timeouts or watchdog timers on background commands to prevent silent stalls.
 
 ## Git & Pull Requests
