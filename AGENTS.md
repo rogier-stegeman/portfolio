@@ -8,7 +8,7 @@
 - Generate new UI primitives in `src/components/ui/` via `pnpm dlx shadcn-vue@latest add <component>`, preserving upstream `shadcn-vue` variant and size APIs unless the user explicitly requests a customisation.
 - Consult authoritative upstream indexes (`https://www.shadcn-vue.com/llms.txt`, `https://reka-ui.com/llms.txt`, `https://ui.shadcn.com/llms.txt`) when researching component APIs, props, or composition patterns.
 - Rely on the root and default styling such as `text-base` for styling unless there's a compelling reason to deviate or the user requests this.
-- Build initial views with minimal, unopinionated markup and layout classes; defer decorative flourishes until shared UI primitives exist.
+- Build views and components with minimal, unopinionated markup and layout classes; rely on native HTML elements and `shadcn-vue` primitives without manual `role`, `aria-*`, or test-only `data-*` attributes.
 - Use built-in framework and router capabilities rather than custom state or duplicated responsive DOM trees.
 
 ## Domain Modelling & Architecture

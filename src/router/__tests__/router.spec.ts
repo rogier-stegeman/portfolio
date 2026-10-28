@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { flushPromises, mount } from '@vue/test-utils'
 import { createMemoryHistory } from 'vue-router'
 import App from '@/App.vue'
+import PrototypeSwitcher from '@/components/PrototypeSwitcher.vue'
 import { createAppRouter } from '@/router'
 
 async function mountAppAt(path: string, includeUnreleased?: boolean) {
@@ -54,7 +55,7 @@ describe('Portfolio routing', () => {
     expect(exitLink.text()).toContain('Exit to Portfolio')
 
     // Shell sidebar: Navigation links
-    const sidebar = wrapper.find('nav[aria-label="Playground navigation"]')
+    const sidebar = wrapper.find('nav')
     expect(sidebar.exists()).toBe(true)
     expect(sidebar.find('a[href="/playground"]').text()).toContain('Overview')
     expect(sidebar.find('a[href="/playground/tokens"]').text()).toContain('Tokens')
@@ -73,17 +74,17 @@ describe('Portfolio routing', () => {
     // Tokens workbench
     const { wrapper: tokensWrapper } = await mountAppAt('/playground/tokens', true)
     expect(tokensWrapper.find('h1').text()).toContain('Design Tokens')
-    expect(tokensWrapper.find('nav[aria-label="Playground navigation"]').exists()).toBe(true)
+    expect(tokensWrapper.find('nav').exists()).toBe(true)
 
     // Components workbench
     const { wrapper: componentsWrapper } = await mountAppAt('/playground/components', true)
     expect(componentsWrapper.find('h1').text()).toContain('Component Workbench')
-    expect(componentsWrapper.find('nav[aria-label="Playground navigation"]').exists()).toBe(true)
+    expect(componentsWrapper.find('nav').exists()).toBe(true)
 
     // Prototypes index
     const { wrapper: prototypesWrapper } = await mountAppAt('/playground/prototypes', true)
     expect(prototypesWrapper.find('h1').text()).toContain('UI Prototypes')
-    expect(prototypesWrapper.find('nav[aria-label="Playground navigation"]').exists()).toBe(true)
+    expect(prototypesWrapper.find('nav').exists()).toBe(true)
   })
 
   it('renders the Design Token workbench grouped into functional categories at /playground/tokens', async () => {
@@ -189,11 +190,48 @@ describe('Portfolio routing', () => {
     expect(card.find('[data-slot="card-footer"]').text()).toBe('Card Footer')
   })
 
-  it('resolves dynamic prototype route /playground/prototypes/:name with parameter in title', async () => {
+  it('lists discovered standalone prototypes on /playground/prototypes using Card primitives', async () => {
+    const { wrapper } = await mountAppAt('/playground/prototypes', true)
+
+    const main = wrapper.find('main')
+    expect(main.find('h1').text()).toBe('UI Prototypes')
+
+    const cards = main.findAll('[data-slot="card"]')
+    expect(cards.length).toBeGreaterThan(0)
+
+    const exampleLink = main.find('a[href="/playground/prototypes/example"]')
+    expect(exampleLink.exists()).toBe(true)
+  })
+
+  it('resolves /playground/prototypes/example, renders ExamplePrototype with PrototypeSwitcher, and switches between variants A and B', async () => {
+    const { wrapper, router } = await mountAppAt('/playground/prototypes/example', true)
+
+    expect(wrapper.find('nav').exists()).toBe(true)
+
+    const main = wrapper.find('main')
+    expect(main.find('h1').text()).toBe('Example Prototype')
+    expect(main.text()).toContain('Split sidebar layout (Variant A)')
+    expect(main.text()).not.toContain('Chronological Delivery Feed')
+
+    const switcher = wrapper.findComponent(PrototypeSwitcher)
+    expect(switcher.exists()).toBe(true)
+    expect(switcher.text()).toContain('A')
+
+    const [, nextButton] = switcher.findAll('button')
+    await nextButton!.trigger('click')
+    await flushPromises()
+
+    expect(router.currentRoute.value.fullPath).toBe('/playground/prototypes/example?variant=B')
+    expect(main.text()).not.toContain('Split sidebar layout (Variant A)')
+    expect(main.text()).toContain('Chronological Delivery Feed')
+  })
+
+  it('renders a prototype not found state within the Playground shell for unknown prototype slugs', async () => {
     const { wrapper } = await mountAppAt('/playground/prototypes/hero-variant', true)
 
-    expect(wrapper.find('h1').text()).toContain('Prototype: hero-variant')
-    expect(wrapper.find('nav[aria-label="Playground navigation"]').exists()).toBe(true)
+    expect(wrapper.find('nav').exists()).toBe(true)
+    expect(wrapper.find('main h1').text()).toBe('Prototype not found')
+    expect(wrapper.find('main').text()).toContain('hero-variant')
   })
 
   it('transitions between sub-routes when clicking navigation links without full page reloads', async () => {
@@ -204,9 +242,7 @@ describe('Portfolio routing', () => {
     expect(router.currentRoute.value.fullPath).toBe('/playground')
 
     // Click Tokens in sidebar
-    const tokensLink = wrapper.find(
-      'nav[aria-label="Playground navigation"] a[href="/playground/tokens"]',
-    )
+    const tokensLink = wrapper.find('nav a[href="/playground/tokens"]')
     await tokensLink.trigger('click')
     await flushPromises()
 
@@ -214,9 +250,7 @@ describe('Portfolio routing', () => {
     expect(wrapper.find('h1').text()).toContain('Design Tokens')
 
     // Click Overview in sidebar back to Playground root
-    const overviewLink = wrapper.find(
-      'nav[aria-label="Playground navigation"] a[href="/playground"]',
-    )
+    const overviewLink = wrapper.find('nav a[href="/playground"]')
     await overviewLink.trigger('click')
     await flushPromises()
 

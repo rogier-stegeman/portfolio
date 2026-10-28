@@ -43,11 +43,11 @@ const buttonSizesList: ButtonSizeSample[] = [
   { label: 'Large', size: 'lg' },
 ]
 
-const buttonIconSizesList: ButtonSizeSample[] = [
-  { label: 'Add item (extra small)', size: 'icon-xs' },
-  { label: 'Add item (small)', size: 'icon-sm' },
-  { label: 'Add item (default)', size: 'icon' },
-  { label: 'Add item (large)', size: 'icon-lg' },
+const buttonIconSizes: NonNullable<ButtonVariants['size']>[] = [
+  'icon-xs',
+  'icon-sm',
+  'icon',
+  'icon-lg',
 ]
 
 const badgeVariantsList: BadgeVariantSample[] = [
@@ -102,13 +102,7 @@ const badgeVariantsList: BadgeVariantSample[] = [
         <div class="space-y-2">
           <h3 class="font-medium">Icon Button Sizes</h3>
           <div class="flex flex-wrap items-center gap-3">
-            <Button
-              v-for="sample in buttonIconSizesList"
-              :key="sample.size"
-              :size="sample.size"
-              variant="outline"
-              :aria-label="sample.label"
-            >
+            <Button v-for="size in buttonIconSizes" :key="size" :size="size" variant="outline">
               <Plus />
             </Button>
           </div>
