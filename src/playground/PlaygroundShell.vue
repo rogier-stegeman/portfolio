@@ -19,7 +19,7 @@ const navItems: NavItem[] = [
     <aside class="w-64 border-r bg-card p-4 text-card-foreground">
       <div class="mb-4 font-semibold">Playground</div>
 
-      <nav aria-label="Playground navigation" class="flex flex-col gap-1">
+      <nav class="flex flex-col gap-1">
         <RouterLink
           v-for="item in navItems"
           :key="item.href"

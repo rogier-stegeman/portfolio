@@ -47,12 +47,12 @@ export function createAppRouter(options: CreateAppRouterOptions = {}) {
                 {
                   path: 'prototypes',
                   name: 'playground-prototypes',
-                  component: () => import('@/playground/views/PrototypesPlaceholderView.vue'),
+                  component: () => import('@/playground/views/PrototypesView.vue'),
                 },
                 {
                   path: 'prototypes/:name',
                   name: 'playground-prototype-detail',
-                  component: () => import('@/playground/views/PrototypeDetailPlaceholderView.vue'),
+                  component: () => import('@/playground/views/PrototypeDetailView.vue'),
                 },
               ],
             },
