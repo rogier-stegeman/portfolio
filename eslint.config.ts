@@ -38,6 +38,14 @@ export default defineConfigWithVueTs(
   },
 
   {
+    name: 'app/shadcn-ui-primitives',
+    files: ['src/components/ui/**/*.vue'],
+    rules: {
+      'vue/multi-word-component-names': 'off',
+    },
+  },
+
+  {
     ...pluginVitest.configs.recommended,
     files: ['src/**/__tests__/*'],
   },

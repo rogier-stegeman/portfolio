@@ -150,6 +150,45 @@ describe('Portfolio routing', () => {
     }
   })
 
+  it('renders the Component Workbench with Button, Badge, and Card showcases at /playground/components', async () => {
+    const { wrapper } = await mountAppAt('/playground/components', true)
+
+    const main = wrapper.find('main')
+    expect(main.find('h1').text()).toBe('Component Workbench')
+
+    const sectionHeadings = main.findAll('h2').map((heading) => heading.text())
+    expect(sectionHeadings).toEqual(['Button', 'Badge', 'Card'])
+
+    // Button showcase: primary variants, sizes, and disabled state
+    const buttons = main.findAll('button')
+    expect(buttons.length).toBeGreaterThan(0)
+    expect(main.find('button[disabled]').exists()).toBe(true)
+
+    const mainText = main.text()
+    for (const label of [
+      'Default',
+      'Secondary',
+      'Destructive',
+      'Outline',
+      'Ghost',
+      'Link',
+      'Extra Small',
+      'Small',
+      'Large',
+    ]) {
+      expect(mainText).toContain(label)
+    }
+
+    // Card showcase: raw Card primitive and its sub-components
+    const card = main.find('[data-slot="card"]')
+    expect(card.exists()).toBe(true)
+    expect(card.find('[data-slot="card-title"]').text()).toBe('Card Title')
+    expect(card.find('[data-slot="card-description"]').text()).toBe('Card Description')
+    expect(card.find('[data-slot="card-action"]').text()).toBe('Card Action')
+    expect(card.find('[data-slot="card-content"]').text()).toBe('Card Content')
+    expect(card.find('[data-slot="card-footer"]').text()).toBe('Card Footer')
+  })
+
   it('resolves dynamic prototype route /playground/prototypes/:name with parameter in title', async () => {
     const { wrapper } = await mountAppAt('/playground/prototypes/hero-variant', true)
 

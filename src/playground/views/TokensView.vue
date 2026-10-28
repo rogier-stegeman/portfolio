@@ -53,7 +53,7 @@ const radiusTokens: string[] = ['--radius-sm', '--radius-md', '--radius-lg', '--
   <div class="space-y-8">
     <header class="space-y-2">
       <h1 class="text-2xl font-semibold">Design Tokens</h1>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground">
         Semantic design tokens defined in <code>src/assets/main.css</code>, following the active
         system colour scheme.
       </p>
@@ -65,16 +65,16 @@ const radiusTokens: string[] = ['--radius-sm', '--radius-md', '--radius-lg', '--
       <ul class="grid grid-cols-1 gap-4 md:grid-cols-3">
         <li v-for="token in category.tokens" :key="token.variable" class="space-y-2">
           <div
-            class="rounded-md border border-border p-4"
+            class="rounded-md border p-4"
             :style="{
               backgroundColor: `var(${token.variable})`,
               color: `var(${token.foreground})`,
             }"
           >
             <p class="font-semibold">Aa Heading</p>
-            <p class="text-sm">The quick brown fox jumps over the lazy dog.</p>
+            <p>The quick brown fox jumps over the lazy dog.</p>
           </div>
-          <div class="text-xs">
+          <div>
             <p class="font-medium">{{ token.name }}</p>
             <p>
               <code>{{ token.variable }}</code> /
@@ -91,12 +91,12 @@ const radiusTokens: string[] = ['--radius-sm', '--radius-md', '--radius-lg', '--
       <ul class="grid grid-cols-1 gap-4 md:grid-cols-3">
         <li v-for="token in borderTokens" :key="token.variable" class="space-y-2">
           <div
-            class="rounded-md border-4 bg-background p-4 text-sm text-foreground"
+            class="rounded-md border-4 bg-background p-4 text-foreground"
             :style="{ borderColor: `var(${token.variable})` }"
           >
             The quick brown fox jumps over the lazy dog.
           </div>
-          <div class="text-xs">
+          <div>
             <p class="font-medium">{{ token.name }}</p>
             <p>
               <code>{{ token.variable }}</code>
@@ -107,11 +107,8 @@ const radiusTokens: string[] = ['--radius-sm', '--radius-md', '--radius-lg', '--
 
       <ul class="grid grid-cols-2 gap-4 md:grid-cols-4">
         <li v-for="token in radiusTokens" :key="token" class="space-y-2">
-          <div
-            class="h-16 border border-border bg-muted"
-            :style="{ borderRadius: `var(${token})` }"
-          />
-          <p class="text-xs">
+          <div class="h-16 border bg-muted" :style="{ borderRadius: `var(${token})` }" />
+          <p>
             <code>{{ token }}</code>
           </p>
         </li>
