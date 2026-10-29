@@ -115,6 +115,127 @@ describe('PrototypeSwitcher', () => {
     wrapper.unmount()
   })
 
+  it('cycles an independent query parameter when queryParam is customized, preserving other params', async () => {
+    const { wrapper, router } = await mountSwitcher('/cv?variant=C&theme=neutral-dark', {
+      variants: [
+        { key: 'neutral-dark', label: 'Neutral Dark' },
+        { key: 'zinc-dark', label: 'Zinc Dark' },
+      ],
+      queryParam: 'theme',
+    })
+
+    expect(wrapper.text()).toContain('Neutral Dark')
+
+    const [, nextButton] = wrapper.findAll('button')
+    await nextButton!.trigger('click')
+    await flushPromises()
+
+    expect(router.currentRoute.value.query.theme).toBe('zinc-dark')
+    expect(router.currentRoute.value.query.variant).toBe('C')
+    expect(wrapper.text()).toContain('Zinc Dark')
+
+    wrapper.unmount()
+  })
+
+  it('disables arrow key listening when enableKeyboard is false', async () => {
+    const { wrapper, router } = await mountSwitcher('/cv?theme=neutral-dark', {
+      variants: ['neutral-dark', 'zinc-dark'],
+      queryParam: 'theme',
+      enableKeyboard: false,
+    })
+
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }))
+    await flushPromises()
+    expect(router.currentRoute.value.query.theme).toBe('neutral-dark')
+
+    wrapper.unmount()
+  })
+
+  it('teleports into #prototype-container when container is available and useGlobalContainer is true', async () => {
+    const container = document.createElement('div')
+    container.id = 'prototype-container'
+    document.body.appendChild(container)
+
+    const { wrapper } = await mountSwitcher('/cv', {
+      variants: ['A', 'B'],
+      useGlobalContainer: true,
+    })
+
+    expect(container.textContent).toContain('A')
+
+    wrapper.unmount()
+    container.remove()
+  })
+
+  it('renders inline without teleporting when useGlobalContainer is false', async () => {
+    const container = document.createElement('div')
+    container.id = 'prototype-container'
+    document.body.appendChild(container)
+
+    const { wrapper } = await mountSwitcher('/cv', {
+      variants: ['A', 'B'],
+      useGlobalContainer: false,
+    })
+
+    expect(container.textContent).toBe('')
+    expect(wrapper.text()).toContain('A')
+
+    wrapper.unmount()
+    container.remove()
+  })
+
+  it('opens a selection menu when the label is clicked, allowing direct variant selection', async () => {
+    const { wrapper, router } = await mountSwitcher('/cv?variant=A', {
+      variants: [
+        { key: 'A', label: 'First' },
+        { key: 'B', label: 'Second' },
+        { key: 'C', label: 'Third' },
+      ],
+      useGlobalContainer: false,
+    })
+
+    const trigger = wrapper.find('[role="button"]')
+    expect(trigger.exists()).toBe(true)
+
+    // Open menu
+    await trigger.trigger('click')
+    await flushPromises()
+
+    // Menu should list all variants
+    const items = wrapper.findAll('.absolute button')
+    expect(items).toHaveLength(3)
+    expect(items[2]!.text()).toContain('C (Third)')
+
+    // Click third item (C)
+    await items[2]!.trigger('click')
+    await flushPromises()
+
+    expect(router.currentRoute.value.query.variant).toBe('C')
+    expect(wrapper.text()).toContain('C (Third)')
+    // Menu closes after selection
+    expect(wrapper.find('.absolute').exists()).toBe(false)
+
+    wrapper.unmount()
+  })
+
+  it('closes the selection menu when pressing Escape', async () => {
+    const { wrapper } = await mountSwitcher('/cv?variant=A', {
+      variants: ['A', 'B'],
+      useGlobalContainer: false,
+    })
+
+    const trigger = wrapper.find('[role="button"]')
+    await trigger.trigger('click')
+    await flushPromises()
+    expect(wrapper.find('.absolute').exists()).toBe(true)
+
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+    await flushPromises()
+    expect(wrapper.find('.absolute').exists()).toBe(false)
+
+    wrapper.unmount()
+  })
+
   it('hides the switcher and does not listen to arrow keys in production builds', async () => {
     vi.stubEnv('DEV', false)
     vi.stubEnv('MODE', 'production')
