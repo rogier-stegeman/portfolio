@@ -3,11 +3,43 @@
  *
  * Provides ready-to-use semantic variable sets for light and dark modes.
  * Can be referenced, copy-pasted into main.css :root, or activated via
- * .theme-neutral-light / .theme-neutral-dark classes and [data-theme="light"] / [data-theme="dark"].
+ * .theme-<name> classes and [data-theme="<name>"].
  */
 
+/* =========================================================================
+   Neutral (Canonical shadcn-vue base)
+   ========================================================================= */
+
+:root[data-theme='neutral-dark'],
+:root[data-theme='dark'],
+.theme-neutral-dark {
+  color-scheme: dark;
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --radius: 0.625rem;
+}
+
+:root[data-theme='neutral-light'],
 :root[data-theme='light'],
 .theme-neutral-light {
+  color-scheme: light;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -30,26 +62,60 @@
   --radius: 0.625rem;
 }
 
-:root[data-theme='dark'],
-.theme-neutral-dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+/* =========================================================================
+   Slate (Cool blue-tinted slate)
+   ========================================================================= */
+
+:root[data-theme='slate-dark'],
+.theme-slate-dark {
+  color-scheme: dark;
+  --background: oklch(0.15 0.02 260);
+  --foreground: oklch(0.98 0.005 260);
+  --card: oklch(0.21 0.02 260);
+  --card-foreground: oklch(0.98 0.005 260);
+  --popover: oklch(0.21 0.02 260);
+  --popover-foreground: oklch(0.98 0.005 260);
+  --primary: oklch(0.92 0.01 260);
+  --primary-foreground: oklch(0.15 0.02 260);
+  --secondary: oklch(0.27 0.02 260);
+  --secondary-foreground: oklch(0.98 0.005 260);
+  --muted: oklch(0.27 0.02 260);
+  --muted-foreground: oklch(0.71 0.02 260);
+  --accent: oklch(0.27 0.02 260);
+  --accent-foreground: oklch(0.98 0.005 260);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
+  --border: oklch(0.27 0.02 260);
+  --input: oklch(0.27 0.02 260);
+  --ring: oklch(0.44 0.03 260);
+  --radius: 0.625rem;
+}
+
+/* =========================================================================
+   Stone (Warm earthy editorial tone)
+   ========================================================================= */
+
+:root[data-theme='stone-dark'],
+.theme-stone-dark {
+  color-scheme: dark;
+  --background: oklch(0.15 0.01 75);
+  --foreground: oklch(0.98 0.005 75);
+  --card: oklch(0.21 0.012 75);
+  --card-foreground: oklch(0.98 0.005 75);
+  --popover: oklch(0.21 0.012 75);
+  --popover-foreground: oklch(0.98 0.005 75);
+  --primary: oklch(0.92 0.01 75);
+  --primary-foreground: oklch(0.15 0.01 75);
+  --secondary: oklch(0.27 0.015 75);
+  --secondary-foreground: oklch(0.98 0.005 75);
+  --muted: oklch(0.27 0.015 75);
+  --muted-foreground: oklch(0.71 0.015 75);
+  --accent: oklch(0.27 0.015 75);
+  --accent-foreground: oklch(0.98 0.005 75);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.27 0.015 75);
+  --input: oklch(0.27 0.015 75);
+  --ring: oklch(0.44 0.02 75);
   --radius: 0.625rem;
 }
