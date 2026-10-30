@@ -28,7 +28,7 @@ describe('CvView', () => {
 
     // Renders default VariantD heading and profile
     expect(wrapper.text()).toContain('Rogier Stegeman')
-    expect(wrapper.text()).toContain('Portfolio Apps')
+    expect(wrapper.text()).toContain('Application Portfolio')
 
     // Finds the layout switcher
     const switcher = wrapper.findComponent(PrototypeSwitcher)
@@ -53,6 +53,6 @@ describe('CvView', () => {
     // VariantM renders Tabbed Workspace navigation
     expect(wrapper.text()).toContain('Overview')
     expect(wrapper.text()).toContain('Experience')
-    expect(wrapper.text()).toContain('Apps')
+    expect(wrapper.text()).toContain('Application Portfolio')
   })
 })

@@ -21,14 +21,14 @@ describe('VariantD', () => {
     expect(hrefs).toContain('https://github.com/rogier-stegeman')
   })
 
-  it('renders top showcase grid for portfolio apps', () => {
+  it('renders top showcase grid for application portfolio', () => {
     const wrapper = mount(VariantD, {
       props: { data: cvData },
     })
 
-    expect(wrapper.text()).toContain('Portfolio Apps')
+    expect(wrapper.text()).toContain('Application Portfolio')
 
-    for (const app of cvData.portfolioApps) {
+    for (const app of cvData.applicationPortfolio) {
       expect(wrapper.text()).toContain(app.title)
       expect(wrapper.text()).toContain(app.summary)
       expect(wrapper.text()).toContain(app.statusLabel)
@@ -107,6 +107,7 @@ describe('VariantD', () => {
         summary: 'Minimal summary.',
         links: [],
       },
+      applicationPortfolio: [],
       portfolioApps: [],
       experience: [],
       education: [],

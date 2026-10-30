@@ -29,17 +29,19 @@ describe('VariantJ', () => {
     const nav = wrapper.find('aside nav')
     expect(nav.exists()).toBe(true)
     expect(nav.text()).toContain('Experience')
-    expect(nav.text()).toContain('Apps')
+    expect(nav.text()).toContain('Application Portfolio')
     expect(nav.text()).toContain('Education')
     expect(nav.text()).toContain('Skills')
   })
 
-  it('renders portfolio apps cleanly without domain or tech tags', () => {
+  it('renders application portfolio cleanly without domain or tech tags', () => {
     const wrapper = mount(VariantJ, {
       props: { data: cvData },
     })
 
-    for (const app of cvData.portfolioApps) {
+    expect(wrapper.text()).toContain('Application Portfolio')
+
+    for (const app of cvData.applicationPortfolio) {
       expect(wrapper.text()).toContain(app.title)
       expect(wrapper.text()).toContain(app.summary)
       expect(wrapper.text()).toContain(app.statusLabel)
@@ -104,9 +106,9 @@ describe('VariantJ', () => {
     expect(wrapper.find('#section-education').exists()).toBe(true)
     expect(wrapper.find('#section-skills').exists()).toBe(true)
 
-    // Click 'Apps' bookmark
+    // Click 'Application Portfolio' bookmark
     const buttons = wrapper.findAll('aside nav button')
-    const appsButton = buttons.find((btn) => btn.text().includes('Apps'))
+    const appsButton = buttons.find((btn) => btn.text().includes('Application Portfolio'))
     expect(appsButton).toBeDefined()
     await appsButton!.trigger('click')
 

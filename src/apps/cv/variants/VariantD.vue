@@ -50,14 +50,14 @@ defineProps<{
 
     <section class="space-y-3">
       <div class="flex items-center justify-between">
-        <h2 class="text-lg font-semibold">Portfolio Apps</h2>
+        <h2 class="text-lg font-semibold">Application Portfolio</h2>
         <span class="text-sm text-muted-foreground">
           Commercial systems, personal tools, and domain applications
         </span>
       </div>
 
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <Card v-for="app in data.portfolioApps" :key="app.id">
+        <Card v-for="app in data.applicationPortfolio" :key="app.id">
           <CardHeader>
             <CardTitle>
               <a

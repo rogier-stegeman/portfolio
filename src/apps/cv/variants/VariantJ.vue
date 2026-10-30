@@ -36,8 +36,8 @@ const bookmarks = computed<readonly BookmarkItem[]>(() => [
   },
   {
     id: 'apps',
-    label: 'Apps',
-    count: props.data.portfolioApps.length,
+    label: 'Application Portfolio',
+    count: props.data.applicationPortfolio.length,
   },
   {
     id: 'education',
@@ -171,16 +171,16 @@ function selectSection(id: SectionKey) {
           </Card>
         </section>
 
-        <!-- Portfolio Apps: Domain applications -->
+        <!-- Application Portfolio: Domain applications and existing systems -->
         <section id="section-apps" class="space-y-4">
           <div class="flex items-center justify-between">
-            <h2 class="text-xl font-semibold tracking-tight">Portfolio Apps</h2>
+            <h2 class="text-xl font-semibold tracking-tight">Application Portfolio</h2>
             <span class="text-xs text-muted-foreground">Applications & Systems</span>
           </div>
 
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
             <Card
-              v-for="app in data.portfolioApps"
+              v-for="app in data.applicationPortfolio"
               :key="app.id"
               class="flex flex-col justify-between"
             >

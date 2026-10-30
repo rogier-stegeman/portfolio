@@ -11,19 +11,23 @@ export interface Profile {
   links: readonly ProfileLink[]
 }
 
-export type PortfolioAppCategory = 'Commercial' | 'Personal' | 'Portfolio'
-export type PortfolioAppStatus = 'released' | 'unreleased' | 'existing'
+export type ApplicationCategory = 'Commercial' | 'Personal' | 'Portfolio'
+export type ApplicationStatus = 'released' | 'unreleased' | 'existing'
 
-export interface PortfolioAppEntry {
+export interface ApplicationEntry {
   id: string
   title: string
   summary: string
-  category: PortfolioAppCategory
-  status: PortfolioAppStatus
+  category: ApplicationCategory
+  status: ApplicationStatus
   statusLabel: string
   route?: string
   externalUrl?: string
 }
+
+export type PortfolioAppCategory = ApplicationCategory
+export type PortfolioAppStatus = ApplicationStatus
+export type PortfolioAppEntry = ApplicationEntry
 
 export interface ExperienceRole {
   title: string
@@ -55,7 +59,8 @@ export interface SkillGroup {
 
 export interface CvData {
   profile: Profile
-  portfolioApps: readonly PortfolioAppEntry[]
+  applicationPortfolio: readonly ApplicationEntry[]
+  portfolioApps?: readonly ApplicationEntry[]
   experience: readonly ExperienceEntry[]
   education: readonly EducationEntry[]
   skillGroups: readonly SkillGroup[]
@@ -79,7 +84,7 @@ export const cvData: CvData = {
       },
     ],
   },
-  portfolioApps: [
+  applicationPortfolio: [
     {
       id: 'track-ex',
       title: 'TrackEx',
@@ -118,6 +123,9 @@ export const cvData: CvData = {
       statusLabel: 'In development',
     },
   ],
+  get portfolioApps() {
+    return this.applicationPortfolio
+  },
   experience: [
     {
       organization: 'Vartion B.V.',

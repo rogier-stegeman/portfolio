@@ -24,6 +24,10 @@ _Avoid_: Draft app, staging app, hidden app
 An application created outside this portfolio repository (either commercially for a client or as a standalone personal tool) that is presented on the CV and may be merged into the portfolio in the future.
 _Avoid_: Legacy app, old project, side project
 
+**Application Portfolio**:
+The collection of applications presented on the CV, encompassing both Existing Apps (commercial and personal) and Apps developed within the Portfolio.
+_Avoid_: Portfolio apps, app showcase
+
 **Playground**:
 A development-only area for exploring UI outside any App: a workbench for shared components and styling, and the home for design prototypes that have no page to live on. Never visible to visitors; not an App.
 _Avoid_: Sandbox, demo, storybook, incubator

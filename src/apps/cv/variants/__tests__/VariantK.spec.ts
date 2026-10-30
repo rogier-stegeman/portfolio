@@ -10,7 +10,7 @@ describe('VariantK', () => {
     })
 
     expect(wrapper.text()).toContain('Technical Specification Sheet')
-    expect(wrapper.text()).toContain('Portfolio Apps')
+    expect(wrapper.text()).toContain('Application Portfolio')
     expect(wrapper.text()).toContain('Experience')
     expect(wrapper.text()).toContain('Education')
     expect(wrapper.text()).toContain('Skills')
@@ -40,12 +40,14 @@ describe('VariantK', () => {
     expect(hrefs).toContain('https://github.com/rogier-stegeman')
   })
 
-  it('renders portfolio apps cleanly without domain or tech tags', () => {
+  it('renders application portfolio cleanly without domain or tech tags', () => {
     const wrapper = mount(VariantK, {
       props: { data: cvData },
     })
 
-    for (const app of cvData.portfolioApps) {
+    expect(wrapper.text()).toContain('Application Portfolio')
+
+    for (const app of cvData.applicationPortfolio) {
       expect(wrapper.text()).toContain(app.title)
       expect(wrapper.text()).toContain(app.summary)
       expect(wrapper.text()).toContain(app.statusLabel)

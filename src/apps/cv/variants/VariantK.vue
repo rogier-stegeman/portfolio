@@ -79,15 +79,15 @@ defineProps<{
     <!-- Portfolio Apps -->
     <section class="space-y-3">
       <div class="flex items-center justify-between border-b border-border pb-2">
-        <h2 class="text-lg font-semibold tracking-tight text-foreground">Portfolio Apps</h2>
+        <h2 class="text-lg font-semibold tracking-tight text-foreground">Application Portfolio</h2>
         <Badge variant="outline" class="text-xs">
-          {{ data.portfolioApps.length }} applications
+          {{ data.applicationPortfolio.length }} applications
         </Badge>
       </div>
 
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
         <article
-          v-for="app in data.portfolioApps"
+          v-for="app in data.applicationPortfolio"
           :key="app.id"
           class="flex flex-col justify-between overflow-hidden rounded-lg border border-border bg-card"
         >

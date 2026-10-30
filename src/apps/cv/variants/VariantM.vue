@@ -29,7 +29,7 @@ const activeTab = ref<TabKey>('overview')
 const tabs: readonly TabDefinition[] = [
   { key: 'overview', label: 'Overview' },
   { key: 'experience', label: 'Experience' },
-  { key: 'apps', label: 'Portfolio Apps' },
+  { key: 'apps', label: 'Application Portfolio' },
   { key: 'education', label: 'Education & Skills' },
 ]
 
@@ -160,7 +160,7 @@ const latestRole = computed(() => mainOrganization.value?.roles[0])
       <div class="space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-2">
           <div class="space-y-0.5">
-            <h2 class="text-lg font-semibold">Portfolio Apps</h2>
+            <h2 class="text-lg font-semibold">Application Portfolio</h2>
             <p class="text-sm text-muted-foreground">
               Commercial systems, personal tools, and domain applications
             </p>
@@ -171,7 +171,7 @@ const latestRole = computed(() => mainOrganization.value?.roles[0])
         </div>
 
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Card v-for="app in data.portfolioApps" :key="app.id">
+          <Card v-for="app in data.applicationPortfolio" :key="app.id">
             <CardHeader>
               <CardTitle>
                 <a
@@ -243,17 +243,17 @@ const latestRole = computed(() => mainOrganization.value?.roles[0])
       </Card>
     </section>
 
-    <!-- Tab 3: Portfolio Apps -->
+    <!-- Tab 3: Application Portfolio -->
     <section v-else-if="activeTab === 'apps'" class="space-y-6">
       <div class="space-y-1">
-        <h2 class="text-xl font-semibold">Portfolio Apps</h2>
+        <h2 class="text-xl font-semibold">Application Portfolio</h2>
         <p class="text-sm text-muted-foreground">
           Commercial systems, personal tools, and specialised domain applications.
         </p>
       </div>
 
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <Card v-for="app in data.portfolioApps" :key="app.id">
+        <Card v-for="app in data.applicationPortfolio" :key="app.id">
           <CardHeader>
             <CardTitle class="text-lg font-semibold">
               <a

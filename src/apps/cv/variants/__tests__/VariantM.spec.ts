@@ -30,7 +30,7 @@ describe('VariantM', () => {
     expect(wrapper.text()).toContain('Latest Role')
     expect(wrapper.text()).toContain('Software Engineer')
     expect(wrapper.text()).toContain('Core Competencies')
-    expect(wrapper.text()).toContain('Portfolio Apps')
+    expect(wrapper.text()).toContain('Application Portfolio')
     expect(wrapper.text()).toContain('TrackEx')
     expect(wrapper.text()).toContain('Eco Living')
     expect(wrapper.text()).toContain('Urban Heat Island Mitigation')
@@ -59,8 +59,8 @@ describe('VariantM', () => {
     expect(wrapper.text()).toContain('Intern Bioinformatician')
     expect(wrapper.text()).toContain('Named entity recognition')
 
-    // Click Portfolio Apps tab
-    const appsBtn = navButtons.find((btn) => btn.text().includes('Portfolio Apps'))
+    // Click Application Portfolio tab
+    const appsBtn = navButtons.find((btn) => btn.text().includes('Application Portfolio'))
     expect(appsBtn).toBeDefined()
     await appsBtn!.trigger('click')
 
