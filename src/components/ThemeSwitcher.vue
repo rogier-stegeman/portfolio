@@ -41,6 +41,6 @@ watch(
     :use-global-container="false"
     :enable-keyboard="false"
     storage-key="portfolio-theme"
-    class="fixed right-4 bottom-4 z-50 shadow-lg backdrop-blur-md"
+    class="fixed right-4 bottom-16 z-50 shadow-lg backdrop-blur-md"
   />
 </template>
