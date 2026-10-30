@@ -17,12 +17,14 @@ const props = withDefaults(
     queryParam?: string
     enableKeyboard?: boolean
     useGlobalContainer?: boolean
+    storageKey?: string
     class?: string
   }>(),
   {
     queryParam: 'variant',
     enableKeyboard: true,
     useGlobalContainer: true,
+    storageKey: undefined,
     class: undefined,
   },
 )
@@ -61,7 +63,16 @@ const activeIndex = computed(() => {
 
   const queryVal = route.query[props.queryParam]
   const currentKey = Array.isArray(queryVal) ? queryVal[0] : queryVal
-  const matchedIndex = list.findIndex((item) => item.key === currentKey)
+  let matchedIndex = list.findIndex((item) => item.key === currentKey)
+
+  if (matchedIndex < 0 && props.storageKey && typeof window !== 'undefined') {
+    try {
+      const saved = window.localStorage.getItem(props.storageKey)
+      matchedIndex = list.findIndex((item) => item.key === saved)
+    } catch {
+      // Ignore storage access errors
+    }
+  }
 
   return matchedIndex >= 0 ? matchedIndex : 0
 })
@@ -83,6 +94,13 @@ const activeLabel = computed(() => {
 
 function selectVariant(key: string) {
   isOpen.value = false
+  if (props.storageKey && typeof window !== 'undefined') {
+    try {
+      window.localStorage.setItem(props.storageKey, key)
+    } catch {
+      // Ignore storage access errors
+    }
+  }
   void router.replace({
     query: {
       ...route.query,

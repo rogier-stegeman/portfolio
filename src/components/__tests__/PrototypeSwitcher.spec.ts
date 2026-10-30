@@ -236,6 +236,45 @@ describe('PrototypeSwitcher', () => {
     wrapper.unmount()
   })
 
+  it('saves and restores active variant from localStorage when storageKey is provided', async () => {
+    window.localStorage.clear()
+
+    const { wrapper, router } = await mountSwitcher('/cv?theme=slate-ombre', {
+      variants: [
+        { key: 'neutral-ombre', label: 'Neutral Ombre' },
+        { key: 'slate-ombre', label: 'Slate Ombre' },
+        { key: 'frutiger-aero', label: 'Frutiger Aero' },
+      ],
+      queryParam: 'theme',
+      useGlobalContainer: false,
+      storageKey: 'test-theme',
+    })
+
+    const [, nextButton] = wrapper.findAll('button')
+    await nextButton!.trigger('click')
+    await flushPromises()
+
+    expect(router.currentRoute.value.query.theme).toBe('frutiger-aero')
+    expect(window.localStorage.getItem('test-theme')).toBe('frutiger-aero')
+
+    wrapper.unmount()
+
+    // Mount again without query param - should read from localStorage
+    const remount = await mountSwitcher('/cv', {
+      variants: [
+        { key: 'neutral-ombre', label: 'Neutral Ombre' },
+        { key: 'slate-ombre', label: 'Slate Ombre' },
+        { key: 'frutiger-aero', label: 'Frutiger Aero' },
+      ],
+      queryParam: 'theme',
+      useGlobalContainer: false,
+      storageKey: 'test-theme',
+    })
+
+    expect(remount.wrapper.text()).toContain('Frutiger Aero')
+    remount.wrapper.unmount()
+  })
+
   it('hides the switcher and does not listen to arrow keys in production builds', async () => {
     vi.stubEnv('DEV', false)
     vi.stubEnv('MODE', 'production')
