@@ -32,7 +32,12 @@ describe('VariantD', () => {
       expect(wrapper.text()).toContain(app.title)
       expect(wrapper.text()).toContain(app.summary)
       expect(wrapper.text()).toContain(app.statusLabel)
+      expect(wrapper.text()).toContain(app.category)
     }
+
+    const trackExLink = wrapper.find('a[href="https://github.com/rogier-stegeman/TrackEx"]')
+    expect(trackExLink.exists()).toBe(true)
+    expect(wrapper.text()).toContain('Repository currently private')
   })
 
   it('renders unified chronological Vartion B.V. career timeline with visual milestone nodes', () => {

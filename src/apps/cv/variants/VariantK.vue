@@ -87,7 +87,7 @@ defineProps<{
 
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
         <article
-          v-for="(app, idx) in data.portfolioApps"
+          v-for="app in data.portfolioApps"
           :key="app.id"
           class="flex flex-col justify-between overflow-hidden rounded-lg border border-border bg-card"
         >
@@ -95,14 +95,29 @@ defineProps<{
             <div
               class="flex items-center justify-between border-b border-border bg-muted/30 px-4 py-2 text-xs"
             >
-              <span class="font-medium text-muted-foreground">Application {{ idx + 1 }}</span>
+              <span class="font-medium text-muted-foreground">{{ app.category }} App</span>
               <Badge variant="secondary" class="text-[11px]">
                 {{ app.statusLabel }}
               </Badge>
             </div>
             <div class="space-y-2 p-4">
-              <h3 class="text-base font-semibold tracking-tight">{{ app.title }}</h3>
+              <h3 class="text-base font-semibold tracking-tight">
+                <a
+                  v-if="app.externalUrl"
+                  :href="app.externalUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 hover:underline"
+                >
+                  <span>{{ app.title }}</span>
+                  <ExternalLink class="size-3.5 text-muted-foreground" />
+                </a>
+                <span v-else>{{ app.title }}</span>
+              </h3>
               <p class="text-sm leading-relaxed text-muted-foreground">{{ app.summary }}</p>
+              <p v-if="app.externalUrl" class="text-xs text-muted-foreground/80">
+                (Repository currently private &middot; will be made public)
+              </p>
             </div>
           </div>
         </article>

@@ -43,7 +43,12 @@ describe('VariantJ', () => {
       expect(wrapper.text()).toContain(app.title)
       expect(wrapper.text()).toContain(app.summary)
       expect(wrapper.text()).toContain(app.statusLabel)
+      expect(wrapper.text()).toContain(app.category)
     }
+
+    const trackExLink = wrapper.find('a[href="https://github.com/rogier-stegeman/TrackEx"]')
+    expect(trackExLink.exists()).toBe(true)
+    expect(wrapper.text()).toContain('Repository currently private')
 
     expect(wrapper.text()).not.toContain('Domain Focus')
     expect(wrapper.text()).not.toContain('Tech Stack')

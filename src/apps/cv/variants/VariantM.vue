@@ -160,9 +160,9 @@ const latestRole = computed(() => mainOrganization.value?.roles[0])
       <div class="space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-2">
           <div class="space-y-0.5">
-            <h2 class="text-lg font-semibold">Upcoming Portfolio Apps</h2>
+            <h2 class="text-lg font-semibold">Portfolio Apps</h2>
             <p class="text-sm text-muted-foreground">
-              Ecological and spatial modelling applications currently in development
+              Commercial systems, personal tools, and domain applications
             </p>
           </div>
           <Button variant="ghost" size="sm" @click="activeTab = 'apps'">
@@ -173,13 +173,33 @@ const latestRole = computed(() => mainOrganization.value?.roles[0])
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
           <Card v-for="app in data.portfolioApps" :key="app.id">
             <CardHeader>
-              <CardTitle>{{ app.title }}</CardTitle>
+              <CardTitle>
+                <a
+                  v-if="app.externalUrl"
+                  :href="app.externalUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 hover:underline"
+                >
+                  <span>{{ app.title }}</span>
+                  <ExternalLink class="size-3.5 text-muted-foreground" />
+                </a>
+                <span v-else>{{ app.title }}</span>
+              </CardTitle>
               <CardAction>
-                <Badge variant="secondary">{{ app.statusLabel }}</Badge>
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <Badge variant="outline">{{ app.category }}</Badge>
+                  <Badge :variant="app.status === 'existing' ? 'default' : 'secondary'">
+                    {{ app.statusLabel }}
+                  </Badge>
+                </div>
               </CardAction>
             </CardHeader>
-            <CardContent>
+            <CardContent class="space-y-2">
               <p class="text-muted-foreground">{{ app.summary }}</p>
+              <p v-if="app.externalUrl" class="text-xs text-muted-foreground/80">
+                (Repository currently private &middot; will be made public)
+              </p>
             </CardContent>
           </Card>
         </div>
@@ -228,21 +248,40 @@ const latestRole = computed(() => mainOrganization.value?.roles[0])
       <div class="space-y-1">
         <h2 class="text-xl font-semibold">Portfolio Apps</h2>
         <p class="text-sm text-muted-foreground">
-          Specialised domain applications focusing on urban ecology, geospatial analysis, and
-          biodiversity connectivity.
+          Commercial systems, personal tools, and specialised domain applications.
         </p>
       </div>
 
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
         <Card v-for="app in data.portfolioApps" :key="app.id">
           <CardHeader>
-            <CardTitle class="text-lg font-semibold">{{ app.title }}</CardTitle>
+            <CardTitle class="text-lg font-semibold">
+              <a
+                v-if="app.externalUrl"
+                :href="app.externalUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 hover:underline"
+              >
+                <span>{{ app.title }}</span>
+                <ExternalLink class="size-3.5 text-muted-foreground" />
+              </a>
+              <span v-else>{{ app.title }}</span>
+            </CardTitle>
             <CardAction>
-              <Badge variant="secondary">{{ app.statusLabel }}</Badge>
+              <div class="flex flex-wrap items-center gap-1.5">
+                <Badge variant="outline">{{ app.category }}</Badge>
+                <Badge :variant="app.status === 'existing' ? 'default' : 'secondary'">
+                  {{ app.statusLabel }}
+                </Badge>
+              </div>
             </CardAction>
           </CardHeader>
-          <CardContent>
+          <CardContent class="space-y-2">
             <p class="leading-relaxed text-muted-foreground">{{ app.summary }}</p>
+            <p v-if="app.externalUrl" class="text-xs text-muted-foreground/80">
+              (Repository currently private &middot; will be made public)
+            </p>
           </CardContent>
         </Card>
       </div>

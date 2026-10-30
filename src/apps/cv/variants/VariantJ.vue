@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { CvData } from '@/apps/cv/cv-data'
 import { computed, ref } from 'vue'
+import { ExternalLink } from '@lucide/vue'
 import { GitHubIcon, LinkedInIcon } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -174,7 +175,7 @@ function selectSection(id: SectionKey) {
         <section id="section-apps" class="space-y-4">
           <div class="flex items-center justify-between">
             <h2 class="text-xl font-semibold tracking-tight">Portfolio Apps</h2>
-            <span class="text-xs text-muted-foreground">Domain Applications</span>
+            <span class="text-xs text-muted-foreground">Applications & Systems</span>
           </div>
 
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -184,13 +185,33 @@ function selectSection(id: SectionKey) {
               class="flex flex-col justify-between"
             >
               <CardHeader>
-                <CardTitle class="text-lg">{{ app.title }}</CardTitle>
+                <CardTitle class="text-lg">
+                  <a
+                    v-if="app.externalUrl"
+                    :href="app.externalUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 hover:underline"
+                  >
+                    <span>{{ app.title }}</span>
+                    <ExternalLink class="size-3.5 text-muted-foreground" />
+                  </a>
+                  <span v-else>{{ app.title }}</span>
+                </CardTitle>
                 <CardAction>
-                  <Badge variant="secondary">{{ app.statusLabel }}</Badge>
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <Badge variant="outline">{{ app.category }}</Badge>
+                    <Badge :variant="app.status === 'existing' ? 'default' : 'secondary'">
+                      {{ app.statusLabel }}
+                    </Badge>
+                  </div>
                 </CardAction>
               </CardHeader>
-              <CardContent>
+              <CardContent class="space-y-2">
                 <p class="text-sm leading-relaxed text-muted-foreground">{{ app.summary }}</p>
+                <p v-if="app.externalUrl" class="text-xs text-muted-foreground/80">
+                  (Repository currently private &middot; will be made public)
+                </p>
               </CardContent>
             </Card>
           </div>

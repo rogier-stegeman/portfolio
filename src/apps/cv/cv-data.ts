@@ -11,13 +11,18 @@ export interface Profile {
   links: readonly ProfileLink[]
 }
 
+export type PortfolioAppCategory = 'Commercial' | 'Personal' | 'Portfolio'
+export type PortfolioAppStatus = 'released' | 'unreleased' | 'existing'
+
 export interface PortfolioAppEntry {
   id: string
   title: string
   summary: string
-  status: 'released' | 'unreleased'
+  category: PortfolioAppCategory
+  status: PortfolioAppStatus
   statusLabel: string
   route?: string
+  externalUrl?: string
 }
 
 export interface ExperienceRole {
@@ -76,10 +81,30 @@ export const cvData: CvData = {
   },
   portfolioApps: [
     {
+      id: 'track-ex',
+      title: 'TrackEx',
+      summary:
+        'Commercial delivery vehicle tracking application built for a delivery company to monitor vehicle status and fleet operations. Developed pre-AI agent era.',
+      category: 'Commercial',
+      status: 'existing',
+      statusLabel: 'Existing (Pre-AI)',
+      externalUrl: 'https://github.com/rogier-stegeman/TrackEx',
+    },
+    {
+      id: 'eco-living',
+      title: 'Eco Living',
+      summary:
+        'Personal decision-support tool for making eco-conscious daily choices, such as evaluating clothing fibre sustainability. Existing application to be merged into this portfolio.',
+      category: 'Personal',
+      status: 'existing',
+      statusLabel: 'Existing (Merging soon)',
+    },
+    {
       id: 'urban-heat-island-mitigation',
       title: 'Urban Heat Island Mitigation',
       summary:
         'Spatial analysis of urban canopy coverage, surface temperature anomalies, and green infrastructure interventions for microclimate cooling.',
+      category: 'Portfolio',
       status: 'unreleased',
       statusLabel: 'In development',
     },
@@ -88,6 +113,7 @@ export const cvData: CvData = {
       title: 'Urban Habitat Connector',
       summary:
         'Ecological network modelling application for evaluating habitat fragmentation, pollinator corridors, and urban biodiversity connectivity.',
+      category: 'Portfolio',
       status: 'unreleased',
       statusLabel: 'In development',
     },

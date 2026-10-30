@@ -38,7 +38,7 @@ const activeVariant = computed<CvVariantKey>(() => {
     <PrototypeSwitcher
       :variants="variants"
       :use-global-container="false"
-      class="fixed right-4 bottom-4 z-50 shadow-lg backdrop-blur-md"
+      class="fixed right-4 bottom-16 z-50 shadow-lg backdrop-blur-md"
     />
   </main>
 </template>
