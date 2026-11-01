@@ -14,6 +14,7 @@ export default defineConfig({
     },
   },
   server: {
-    allowedHosts: ['.pinggy.link', '.pinggy.net', '.pinggy-free.link'],
+    host: true,
+    allowedHosts: ['.pinggy.link', '.pinggy.net', '.pinggy-free.link', 'rogier-desktop', '.ts.net'],
   },
 })
