@@ -32,7 +32,8 @@ const apps: AppSummary[] = [
     title: 'CV App',
     period: '2026 Q3',
     status: 'Released',
-    summary: 'Author profile, engineering experience, and entry points to Portfolio Apps.',
+    summary:
+      'Author profile, engineering experience, and entry points to the Application Portfolio.',
   },
   {
     id: 'urban-ecology',

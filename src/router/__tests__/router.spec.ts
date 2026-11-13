@@ -24,18 +24,18 @@ async function mountAppAt(path: string, includeUnreleased?: boolean) {
 }
 
 describe('Portfolio routing', () => {
-  it('redirects / to /cv and renders the CV App shell', async () => {
+  it('redirects / to /cv and renders the CV App', async () => {
     const { wrapper, router } = await mountAppAt('/')
 
     expect(router.currentRoute.value.fullPath).toBe('/cv')
-    expect(wrapper.find('h1').text()).toBe('CV')
+    expect(wrapper.find('h1').text()).toBe('Rogier Stegeman')
   })
 
-  it('renders the CV App shell when navigating directly to /cv', async () => {
+  it('renders the CV App when navigating directly to /cv', async () => {
     const { wrapper, router } = await mountAppAt('/cv')
 
     expect(router.currentRoute.value.fullPath).toBe('/cv')
-    expect(wrapper.find('h1').text()).toBe('CV')
+    expect(wrapper.find('h1').text()).toBe('Rogier Stegeman')
   })
 
   it('renders the Not Found view with a link back to /cv for unknown routes', async () => {
@@ -263,7 +263,7 @@ describe('Portfolio routing', () => {
     await flushPromises()
 
     expect(router.currentRoute.value.fullPath).toBe('/cv')
-    expect(wrapper.find('h1').text()).toBe('CV')
+    expect(wrapper.find('h1').text()).toBe('Rogier Stegeman')
   })
 
   it('renders the Not Found view for playground and any nested sub-routes when includeUnreleased is false', async () => {
